@@ -1,0 +1,17 @@
+C:\Users\Tytan\source\repos\Logilingua Reborn\bin\Release\Logilingua Reborn.exe.config
+C:\Users\Tytan\source\repos\Logilingua Reborn\bin\Release\Logilingua Reborn.exe
+C:\Users\Tytan\source\repos\Logilingua Reborn\bin\Release\Logilingua Reborn.pdb
+C:\Users\Tytan\source\repos\Logilingua Reborn\obj\Release\Logilingua Reborn.csprojAssemblyReference.cache
+C:\Users\Tytan\source\repos\Logilingua Reborn\obj\Release\Logilingua_Reborn.Form1.resources
+C:\Users\Tytan\source\repos\Logilingua Reborn\obj\Release\Logilingua Reborn.csproj.GenerateResource.cache
+C:\Users\Tytan\source\repos\Logilingua Reborn\obj\Release\Logilingua Reborn.exe
+C:\Users\Tytan\source\repos\Logilingua Reborn\obj\Release\Logilingua Reborn.pdb
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\bin\Release\Logilingua Reborn.exe.config
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\bin\Release\Logilingua Reborn.exe
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\bin\Release\Logilingua Reborn.pdb
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua Reborn.csprojAssemblyReference.cache
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua_Reborn.Form1.resources
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua Reborn.csproj.GenerateResource.cache
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua Reborn.csproj.CoreCompileInputs.cache
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua Reborn.exe
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Release\Logilingua Reborn.pdb
