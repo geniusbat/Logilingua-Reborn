@@ -15,3 +15,4 @@ C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua Reborn.csproj.CoreCompileInputs.cache
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua Reborn.exe
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua Reborn.pdb
+C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua_Reborn.GraphView.resources

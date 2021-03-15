@@ -37,7 +37,7 @@ namespace Logilingua_Reborn
             {
                 wordTo = "piedra";
             }
-            Word palabra = new Word(DataReader.Read("C:\\Users\\Geniusbat\\Documents\\Proyectos\\Programación\\Logilingua Reborn\\Datos\\" + wordTo+".txt"));
+            Word palabra = new Word(DataReader.Read("../../Datos/" + wordTo+".txt"));
             if (Bigrama.Checked==true)
             {
                 textoOutput.Text = palabra.WordGenerationUsingBigrams();
@@ -54,6 +54,11 @@ namespace Logilingua_Reborn
             {
                 textoOutput.Text = palabra.WordGenerationUsingBigramsSequentialBS();
             }
+        }
+
+        private void ChangeViewButton_Click(object sender, EventArgs e)
+        {
+            ViewManager.ChangeToGraph(this);
         }
     }
 }
