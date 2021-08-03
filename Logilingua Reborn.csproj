@@ -59,6 +59,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphPlotting.cs" />
+    <Compile Include="GraphPlottingOld.cs" />
     <Compile Include="GraphView.cs">
       <SubType>Form</SubType>
     </Compile>
