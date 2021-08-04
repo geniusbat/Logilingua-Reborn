@@ -530,7 +530,7 @@ namespace Logilingua_Reborn
             {
                 for (var j = 1; j <= targetLength; j++)
                 {
-                    var cost = (target[j - 1] == source[i - 1]) ? 0 : 1;
+                    var cost = (target[j - 1] == source[i - 1]) ? 0 : 2; //I changed here 0:1 to 0:2 to use demerau distance
 
                     matrix[i, j] = Math.Min(
                         Math.Min(matrix[i - 1, j] + 1, matrix[i, j - 1] + 1),

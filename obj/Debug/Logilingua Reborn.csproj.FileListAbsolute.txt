@@ -16,3 +16,13 @@ C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua Reborn.exe
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua Reborn.pdb
 C:\Users\Geniusbat\Documents\Proyectos\Programación\Logilingua Reborn\obj\Debug\Logilingua_Reborn.GraphView.resources
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\bin\Debug\Logilingua Reborn.exe.config
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\bin\Debug\Logilingua Reborn.exe
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\bin\Debug\Logilingua Reborn.pdb
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua Reborn.csproj.AssemblyReference.cache
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua_Reborn.Form1.resources
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua_Reborn.GraphView.resources
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua Reborn.csproj.GenerateResource.cache
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua Reborn.csproj.CoreCompileInputs.cache
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua Reborn.exe
+C:\Users\PC\Documents\Proyectos\Programacion\Logilingua Reborn\obj\Debug\Logilingua Reborn.pdb

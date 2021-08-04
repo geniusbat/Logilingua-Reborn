@@ -13,6 +13,8 @@ namespace Logilingua_Reborn
         [STAThread]
         static void Main(string[] args)
         {
+            GraphPlotting mamaPlottting = new GraphPlotting("mama");
+            return;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -19,8 +19,7 @@ namespace Logilingua_Reborn
             distanceMatrix = GetDistanceMatrix(cadena);
             //similarityMatrix = new List<List<int>>();
             //similarityMatrix = GetSimilarityMatrix(distanceMatrix);
-            clustersGenerated = DensityBasedClustering(4, 3f);
-
+            clustersGenerated = DensityBasedClustering(1, 2f);
             Console.WriteLine("RESULT");
             ShowClusterOnConsole();
         }
@@ -77,94 +76,96 @@ namespace Logilingua_Reborn
         }
         private List<List<int>> DensityBasedClustering(int minPoints,float eps)
         {
-            List<int> corePoints = new List<int>();
-            List<int> otherPoints = new List<int>();
-            //Get core points
+            Console.WriteLine(distanceMatrix[0][1]);
+            List<List<int>> clusters = new List<List<int>>();
+            List<int> visited = new List<int>();
+            List<int> noisePoints = new List<int>();
             for (int i = 0; i < wordList.Count(); i++)
             {
-                int curPoints = 0;
-                //I is the tested potential core point
-                for (int j = 0; j < wordList.Count(); j++)
+                if (!visited.Contains(i))
                 {
-                    if (i!=j)
+                    visited.Add(i);
+                    //Get neighbors
+                    List<int> neighbors = new List<int>();
+                    for (int j = 0; j < wordList.Count(); j++)
                     {
-                        //Check if j is within distance eps
-                        if (distanceMatrix[i][j]<=eps)
+                        if (i!=j)
                         {
-                            curPoints += 1;
+                            if (distanceMatrix[i][j]<=eps)
+                            {
+                                neighbors.Add(j);
+                            }
                         }
                     }
-                }
-                //Check if the point can be a core point
-                if (curPoints>=minPoints)
-                {
-                    corePoints.Add(i);
-                }
-                else
-                {
-                    otherPoints.Add(i);
-                }
-            }
-
-            var clusters = new List<List<int>>();
-            //Cluster core points
-            List<int> alreadyClustered = new List<int>();
-            foreach (int pointA in corePoints)
-            {
-                List<int> community = new List<int>();
-                community.Add(pointA);
-                alreadyClustered.Add(pointA);
-                foreach (int pointB in corePoints)
-                {
-                    if ((pointA!=pointB)&&(!alreadyClustered.Contains(pointB))) {
-                        if (distanceMatrix[pointA][pointB] <= eps)
-                        {
-                            community.Add(pointB);
-                            alreadyClustered.Add(pointB);
-                        }
-                    }
-                }
-                clusters.Add(community);
-            }
-            //PrintList(corePoints);
-            //PrintList(otherPoints);
-            //Print current clusters
-            //PrintCluster(clusters);
-            //Cluster all other points, basically check if leftover points are noise or border points
-            foreach (int point in otherPoints)
-            {
-                int nearbyCorePoint = distanceMatrix[point][0];
-                //Check if near another core point
-                foreach (int corePoint in corePoints)
-                {
-                    int dist = distanceMatrix[point][corePoint];
-                    if (dist<distanceMatrix[point][nearbyCorePoint])
+                    /*
+                    if (wordList[i]=="mother")
                     {
-                        nearbyCorePoint = corePoint;
-                    }
-                }
-                //Assign to nearby corepoint if under eps
-                if (distanceMatrix[point][nearbyCorePoint]<=eps)
-                {
-                    //Get cluster that nearbyCorePoint is from
-                    foreach (List<int> comm in clusters)
+                        PrintList(neighbors);
+                    }*/
+                    //Make core point if necessary
+                    if (neighbors.Count()>=minPoints)
                     {
-                        if (comm.Contains(nearbyCorePoint))
+                        List<int> community = new List<int>();
+                        community.Add(i);
+                        //Expand community
+                        for (int h = 0; h < neighbors.Count(); h++)
                         {
-                            comm.Add(point);
-                            break;
+                            int item = neighbors[h];
+                            if (!visited.Contains(item))
+                            {
+                                visited.Add(item);
+                                if (distanceMatrix[i][item]<=eps)
+                                {
+                                    List<int> aux = new List<int>();
+                                    //Get neighbors of item
+                                    for (int j = 0; j < wordList.Count(); j++)
+                                    {
+                                        if (item != j)
+                                        {
+                                            if (distanceMatrix[item][j] <= eps)
+                                            {
+                                                aux.Add(j);
+                                            }
+                                        }
+                                    }
+                                    if (aux.Count() >= eps)
+                                    {
+                                        neighbors = neighbors.Union(aux).ToList();
+                                        h = 0;
+                                    }
+                                }
+                                if (!PointIsInAnyCluster(item, clusters))
+                                {
+                                    community.Add(item);
+                                }
+                            }
                         }
+                        clusters.Add(community);
                     }
-                }
-                else
-                {
-                    List<int> com = new List<int>();
-                    com.Add(point);
-                    clusters.Add(com);
+                    else
+                    {
+                        noisePoints.Add(i);
+                        List<int> aux = new List<int>();
+                        aux.Add(i);
+                        clusters.Add(aux);
+                    }
                 }
             }
             return clusters;
         }
+
+        private bool PointIsInAnyCluster(int point,List<List<int>> clusters)
+        {
+            foreach (List<int> c in clusters)
+            {
+                if (c.Contains(point))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private float DistanceBetweenCommunities(List<int> communityA, List<int> communityB)
         {
             float ret = 0f;
@@ -206,6 +207,105 @@ namespace Logilingua_Reborn
                 Console.Write(item + "; ");
             }
             Console.WriteLine("");
+        }
+
+        private Dictionary<int, List<List<int>>> HierarchycalClustering()
+        {
+            int iteration = 0;
+            Dictionary<int, List<List<int>>> clusters = new Dictionary<int, List<List<int>>>();
+            List<List<int>> generation = new List<List<int>>();
+            //Initial situation
+            for (int i = 0; i < wordList.Count(); i++)
+            {
+                List<int> l = new List<int>();
+                l.Add(i);
+                generation.Add(l);
+            }
+            clusters[0] = generation;
+            //Iterate
+            int maxIterations = 10;
+            while (iteration<maxIterations) 
+            {
+                //Get previous generation to cluster
+                generation = new List<List<int>>(clusters[clusters.Count() - 1]);
+                //Break if all elements in one cluster
+                if (generation.Count()==1)
+                {
+                    break;
+                }
+                //Continue if else
+                List<List<int>> visited = new List<List<int>>();
+                for (int i = 0; i < generation.Count(); i++)
+                { 
+                    List<int> comA = generation[i];
+                    visited.Add(comA);
+                    int minDist = 0;
+                    bool firstTime = true;
+                    List<int> bestCom = new List<int>();
+                    //Look for best option
+                    for (int j = 0; j < generation.Count(); j++)
+                    {
+                        if (i!=j)
+                        {
+                            List<int> comB = generation[j];
+                            if (!visited.Contains(comB)) //Make sure cluster j wasn't visited
+                            {
+                                int distance = GetDistanceBetweenCommunities(comA, comB);
+                                if ((distance < minDist) || (firstTime))
+                                {
+                                    firstTime = false;
+                                    minDist = distance;
+                                    bestCom = comB;
+                                }
+                            }
+                        }
+                    }
+                    //Make sure that A's best option is B's best option too
+                    if (bestCom.Count()!=0)
+                    {
+                        List<int> aux = new List<int>();
+                        firstTime = true;
+                        for (int j = 0; j < generation.Count(); j++)
+                        {
+                            List<int> comC = generation[j];
+                            if (!visited.Contains(comC)) //Make sure cluster j wasn't visited
+                            {
+                                int distance = GetDistanceBetweenCommunities(bestCom, comC);
+                                if ((distance < minDist) || (firstTime))
+                                {
+                                    firstTime = false;
+                                    minDist = distance;
+                                    aux = comC;
+                                }
+                            }
+                        }
+                        if (aux==comA)
+                        {
+                            //Add B to visited if so
+                            visited.Add(bestCom);
+                        }
+                    }
+                }
+                //Add to dictionary
+                clusters[iteration] = generation;
+                //Increase iteration
+                iteration += 1;
+            }
+            return clusters;
+        }
+        //Distance is measured as the average of distances
+        private int GetDistanceBetweenCommunities(List<int> comA,List<int> comB)
+        {
+            int ret = 0;
+            foreach (int wordA in comA)
+            {
+                foreach (int wordB in comB)
+                {
+                    ret += distanceMatrix[wordA][wordB];
+                }
+            }
+            ret /= wordList.Count();
+            return ret;
         }
     }
 }
